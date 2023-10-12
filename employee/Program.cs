@@ -83,6 +83,13 @@ namespace employee
 
 
         }
+
+        static double fizetesAtlag(List<Employee> a)
+        {
+            var atlag = a.Average(ave => ave.Salary);
+            return atlag;
+        }
+
         //Készíts egy függvényt, amelynek visszatérési értéke egy objektumokat tartalmazó lista, amelyben szerepel az 5 millió forint éves fizetés feletti munkavállalók neve és az éves fizetésük forintban. (Az átszámításhoz használd az előző feladat függvényét.)  Az elkészült listát a főprogram írja ki egy új fájlba(a virtuális metódus segítségével)
 
 
@@ -179,23 +186,33 @@ namespace employee
             //16. Írj egy függvényt, aminek a paramétere az eredeti adatokat tartalmazó listának megfelelő típusú. Ennek segítségével számold ki az összes alkalmazott átlagfizetését.
             Console.WriteLine("16. feladat");
 
+            Console.WriteLine("Az alkalmazottak átlag fizetése: ");
+
+            foreach (var i in dolgozok)
+            {
+                Console.WriteLine($"{i.Name} átlag fizetése: {fizetesAtlag(i.Salary)}");
+            }
+
 
             //17. Készíts a főprogramban egy olyan listát, amiben csak a developer beosztásúak találhatók, minden tulajdonságukkal. Hívd meg újra a főprogramból az előző függvényt, de most ez az új lista legyen a paramétere. A főprogram írja ki a developerek átlagfizetését.
             Console.WriteLine("17. feladat");
+
+            var devs = dolgozok.Where(d => d.Position == "Developer");
+
+            var DevLista = new List<Employee>(devs);
+
 
 
             //18. Számold ki a férfi és női alkalmazottak átlagfizetését tetszőleges módszerrel.
             Console.WriteLine("18. feladat");
 
-
             var f18m = dolgozok.Where(ave => ave.Gender == "Male").Average(ave => ave.Salary);
             var f18f = dolgozok.Where(ave => ave.Gender == "Female").Average(ave => ave.Salary);
-
 
             Console.WriteLine($"A férfi alkalmazottak havi átlagfizetése: {Math.Round(f18m)}EUR");
             Console.WriteLine($"A női alkalmazottak havi átlagfizetése: {Math.Round(f18f)}EUR");
 
-
         }
+
     }
 }
